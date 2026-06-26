@@ -142,7 +142,6 @@ jobs:
       shell: powershell
       run: |
         @(
-          "${{ github.workspace }}\x64\Release\a\OptiScaler",
           "${{ github.workspace }}\x64\Release\a\OptiScaler\plugins",
           "${{ github.workspace }}\x64\Release\a\OptiScaler\streamline"
         ) | ForEach-Object {
@@ -166,25 +165,6 @@ jobs:
           if (Test-Path $_) {
             Write-Host "Removing $($_)"
             Remove-Item $_ -Recurse -Force
-          }
-          else {
-            Write-Host "Not found $($_)"
-          }
-        }
-
-        @(
-          "${{ github.workspace }}\x64\Release\a\amd_fidelityfx_dx12.dll",
-          "${{ github.workspace }}\x64\Release\a\amd_fidelityfx_framegeneration_dx12.dll",
-          "${{ github.workspace }}\x64\Release\a\amd_fidelityfx_upscaler_dx12.dll",
-          "${{ github.workspace }}\x64\Release\a\amd_fidelityfx_vk.dll",
-          "${{ github.workspace }}\x64\Release\a\libxell.dll",
-          "${{ github.workspace }}\x64\Release\a\libxess.dll",
-          "${{ github.workspace }}\x64\Release\a\libxess_dx11.dll",
-          "${{ github.workspace }}\x64\Release\a\libxess_fg.dll"
-        ) | ForEach-Object {
-          if (Test-Path $_) {
-            Write-Host "Moving $($_)"
-             Move-Item $_ -Destination "${{ github.workspace }}\x64\Release\a\OptiScaler" -Force
           }
           else {
             Write-Host "Not found $($_)"
