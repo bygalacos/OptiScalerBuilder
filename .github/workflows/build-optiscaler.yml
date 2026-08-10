@@ -73,7 +73,21 @@ jobs:
         $buildVersion = Get-Version-Component 'VER_BUILD_NUMBER' '#define VER_BUILD_NUMBER\s+'
         
         # Merge into a single version string
-        $version = "v$majorVersion.$minorVersion.$hotfixVersion-pre$buildVersion"
+        #$version = "v$majorVersion.$minorVersion.$hotfixVersion-pre$buildVersion"
+
+        # Read resource.h to determine the release type
+        $resourceContent = Get-Content $resourceFile -Raw
+
+        # Construct version based on upstream release type
+        if ($resourceContent -match '(?m)^\s*#define\s+VER_DEV_RELEASE\s*$') {
+            $version = "v$majorVersion.$minorVersion.$hotfixVersion-dev"
+        }
+        elseif ($resourceContent -match '(?m)^\s*#define\s+VER_PRE_RELEASE\s*$') {
+            $version = "v$majorVersion.$minorVersion.$hotfixVersion-pre$buildVersion"
+        }
+        else {
+            $version = "v$majorVersion.$minorVersion.$hotfixVersion"
+        }
 
         # Get the current date and time
         $date = Get-Date -Format "yyyyMMdd_HHmmss"
