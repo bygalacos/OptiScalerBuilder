@@ -30,7 +30,7 @@ jobs:
     environment: Build
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         repository: optiscaler/OptiScaler
         ref: ca5d59afb137b85c9d429ae608aa30d87bb9ebef
