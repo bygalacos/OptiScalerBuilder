@@ -164,7 +164,6 @@ jobs:
         }
 
         @(
-          "${{ github.workspace }}\x64\Release\a\D3D12_Optiscaler",
           "${{ github.workspace }}\x64\Release\a\Licenses",
           "${{ github.workspace }}\x64\Release\a\!! EXTRACT ALL FILES TO GAME FOLDER !!",
           "${{ github.workspace }}\x64\Release\a\setup_linux.sh",
