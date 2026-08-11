@@ -232,7 +232,7 @@ jobs:
 
         Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $out
       
-    - name: bygalacos - Download latest NVIDIA Streamline SDK
+    - name: bygalacos - Download Latest NVIDIA Streamline SDK
       id: streamline
       shell: powershell
       run: |
@@ -298,7 +298,7 @@ jobs:
           Copy-Item $_.FullName "${{ github.workspace }}\x64\Release\a\OptiScaler\streamline" -Force
         }
       
-    - name: bygalacos - Download latest DLSS Enabler
+    - name: bygalacos - Download Latest DLSS Enabler
       id: dlssenabler
       shell: powershell
       run: |

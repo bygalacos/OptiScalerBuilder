@@ -231,7 +231,7 @@ jobs:
 
         Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $out
       
-    - name: bygalacos - Download latest NVIDIA Streamline SDK
+    - name: bygalacos - Download Latest NVIDIA Streamline SDK
       id: streamline
       shell: powershell
       run: |
@@ -297,7 +297,7 @@ jobs:
           Copy-Item $_.FullName "${{ github.workspace }}\x64\Release\a\OptiScaler\streamline" -Force
         }
       
-    - name: bygalacos - Download latest DLSS Enabler
+    - name: bygalacos - Download Latest DLSS Enabler
       id: dlssenabler
       shell: powershell
       run: |
@@ -329,6 +329,21 @@ jobs:
         Expand-Archive -Path "${{ github.workspace }}\dlss-enabler.zip" -DestinationPath "${{ github.workspace }}\x64\Release\a\OptiScaler" -Force
         Rename-Item -Path "${{ github.workspace }}\x64\Release\a\OptiScaler\version.dll" -NewName "dlss-enabler-headless.dll"
       
+    - name: bygalacos - Download Latest dlssg_to_fsr3
+      id: dlssg_to_fsr3
+      shell: powershell
+      run: |
+        $dlssg_to_fsr3_version = "v0.130"
+        "version=$dlssg_to_fsr3_version" >> $env:GITHUB_OUTPUT
+        Write-Host "dlssg_to_fsr3 version output set: $dlssg_to_fsr3_version"
+
+        Write-Host "Downloading dlssg_to_fsr3" "$dlssg_to_fsr3_version"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bygalacos/OptiScalerBuilder/master/dlssg_to_fsr3/dlssg_to_fsr3_amd_is_better.zip" -OutFile "${{ github.workspace }}\dlssg_to_fsr3_amd_is_better.zip"
+        Write-Host "Size: $([math]::Round((Get-Item "${{ github.workspace }}\dlssg_to_fsr3_amd_is_better.zip").Length / 1MB, 2)) MB"
+
+        Write-Host "Extracting dlssg_to_fsr3" "$dlssg_to_fsr3_version"
+        Expand-Archive -Path "${{ github.workspace }}\dlssg_to_fsr3_amd_is_better.zip" -DestinationPath "${{ github.workspace }}\x64\Release\a\OptiScaler" -Force
+      
     - name: Compress the artifact
       run: |
         $zipName = "${{ steps.get_version.outputs.filename }}_bygalacos.7z"
@@ -359,6 +374,7 @@ jobs:
           | OptiPatcher | ${{ steps.optipatcher.outputs.version }} |
           | NVIDIA Streamline SDK | ${{ steps.streamline.outputs.version }} |
           | DLSS Enabler | ${{ steps.dlssenabler.outputs.version }} |
+          | dlssg_to_fsr3 | ${{ steps.dlssg_to_fsr3.outputs.version }} |
 
           Build Package:
           `${{ steps.get_version.outputs.filename }}_bygalacos.7z`
