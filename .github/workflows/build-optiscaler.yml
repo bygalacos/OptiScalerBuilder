@@ -334,15 +334,15 @@ jobs:
       id: dlssg_to_fsr3
       shell: powershell
       run: |
-        $version = "v0.130"
-        "version=$version" >> $env:GITHUB_OUTPUT
-        Write-Host "dlssg_to_fsr3 version output set: $version"
+        $dlssg_to_fsr3_version = "v0.130"
+        "version=$dlssg_to_fsr3_version" >> $env:GITHUB_OUTPUT
+        Write-Host "dlssg_to_fsr3 version output set: $dlssg_to_fsr3_version"
 
-        Write-Host "Downloading dlssg_to_fsr3" "$version"
+        Write-Host "Downloading dlssg_to_fsr3" "$dlssg_to_fsr3_version"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bygalacos/OptiScalerBuilder/master/dlssg_to_fsr3/dlssg_to_fsr3_amd_is_better.zip" -OutFile "${{ github.workspace }}\dlssg_to_fsr3_amd_is_better.zip"
         Write-Host "Size: $([math]::Round((Get-Item "${{ github.workspace }}\dlssg_to_fsr3_amd_is_better.zip").Length / 1MB, 2)) MB"
 
-        Write-Host "Extracting dlssg_to_fsr3" "$version"
+        Write-Host "Extracting dlssg_to_fsr3" "$dlssg_to_fsr3_version"
         Expand-Archive -Path "${{ github.workspace }}\dlssg_to_fsr3_amd_is_better.zip" -DestinationPath "${{ github.workspace }}\x64\Release\a\OptiScaler" -Force
       
     - name: Compress the artifact
