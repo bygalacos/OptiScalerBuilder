@@ -33,6 +33,7 @@ This repository automatically:
 * Downloads and integrates the latest release of OptiPatcher
 * Downloads and integrates the latest NVIDIA Streamline SDK runtime components
 * Downloads and integrates the latest DLSS Enabler package available in this repository
+* Downloads and integrates the latest dlssg-to-fsr3 package available in this repository
 * Creates a clean, portable package ready for use
 * Generates a GitHub Release containing the packaged build and component version information
 
@@ -54,6 +55,7 @@ Each release includes:
 * OptiPatcher
 * NVIDIA Streamline SDK
 * DLSS Enabler
+* dlssg-to-fsr3
 
 The workflow automatically downloads the latest supported versions, packages them together, and publishes the result as a GitHub Release.
 
