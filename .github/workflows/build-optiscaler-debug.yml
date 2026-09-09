@@ -238,7 +238,7 @@ jobs:
         $release = Invoke-RestMethod "https://api.github.com/repos/NVIDIA-RTX/Streamline/releases/latest"
         "version=$($release.tag_name)" >> $env:GITHUB_OUTPUT
         Write-Host "NVIDIA Streamline SDK version output set: $($release.tag_name)"
-        $asset = $release.assets | Where-Object { $_.name -match "^streamline-sdk-.*\.zip$" } | Select-Object -First 1
+        $asset = $release.assets | Where-Object { $_.name -match "^streamline-sdk-v[0-9.]+\.zip$" } | Select-Object -First 1
 
         if (-not $asset) {
           throw "No streamline-sdk zip asset found in latest release."
